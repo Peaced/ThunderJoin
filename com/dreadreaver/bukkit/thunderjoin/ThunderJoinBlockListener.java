@@ -1,8 +1,8 @@
 package com.dreadreaver.bukkit.thunderjoin;
 
+import org.bukkit.Location;
 import org.bukkit.event.block.BlockIgniteEvent;
 import org.bukkit.event.block.BlockListener;
-import org.bukkit.event.block.BlockIgniteEvent.IgniteCause;
 
 /**
  * ThunderJoin for Bukkit
@@ -12,9 +12,17 @@ import org.bukkit.event.block.BlockIgniteEvent.IgniteCause;
 
 public class ThunderJoinBlockListener extends BlockListener {
 
+	@Override
 	public void onBlockIgnite(BlockIgniteEvent event) {
-		if (event.getCause() == IgniteCause.LIGHTNING) {
-			event.setCancelled(true);
+		Location location = event.getBlock().getLocation();
+		if(event.getCause().equals(BlockIgniteEvent.IgniteCause.LIGHTNING)) {
+			if(ThunderJoin.isThunderLocation(location)){
+				event.setCancelled(true);
+			}
+		} else {
+			if(ThunderJoin.isThunderLocation(location)){
+				ThunderJoin.deleteThunderLocation(location);
+			}
 		}
 	}
 
