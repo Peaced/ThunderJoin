@@ -1,0 +1,5 @@
+name: ThunderJoin
+main: com.dreadreaver.bukkit.thunderjoin.ThunderJoin
+version: 1.0
+author: Dreadreaver
+description: Join with a bang!
